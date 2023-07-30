@@ -1,0 +1,34 @@
+.header {
+  height: 60px;
+  background-color: $color04;
+
+  &__row {
+    display: grid !important;
+    grid-template-columns: 1fr 1fr 1fr;
+    align-items: center;
+
+    .header__logo {
+      @include flex-display(null, null, center, null);
+
+      h1 {
+        margin-left: 20px;
+        margin-bottom: 0;
+        color: $color03;
+        text-transform: uppercase;
+        font-weight: 900;
+        font-stretch: narrower;
+      }
+    }
+
+    .header__user-icons {
+      display: grid;
+      margin-left: auto;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+
+      .header__icon {
+        text-align: center;
+        color: #2c1810;
+      }
+    }
+  }
+}

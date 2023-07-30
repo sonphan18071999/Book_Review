@@ -1,0 +1,32 @@
+@mixin border-style(
+  $border-radius: 5px,
+  $border-width: 1px,
+  $border-style: solid,
+  $border-color: black
+) {
+  border-radius: $border-radius;
+  border-width: $border-width;
+  border-style: $border-style;
+  border-color: $border-color;
+}
+
+@mixin flex-display(
+  $direction: row,
+  $justify-content: flex-start,
+  $align-items: stretch,
+  $flex-wrap: nowrap
+) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify-content;
+  align-items: $align-items;
+  flex-wrap: $flex-wrap;
+}
+
+
+@mixin grid-display($rows, $columns, $cell-width, $cell-height, $cell-gap) {
+  display: grid;
+  grid-template-rows: repeat(#{$rows}, #{$cell-height});
+  grid-template-columns: repeat(#{$columns}, #{$cell-width});
+  gap: #{$cell-gap};
+}
