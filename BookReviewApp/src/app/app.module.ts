@@ -7,6 +7,8 @@ import { PagesModule } from './pages/pages.module';
 import { CommonsModule } from './features/commons/commons.module';
 import { HeaderModule } from "./features/commons/header/header.module";
 import { FooterModule } from './features/commons/footer/footer.module';
+import { GraphQLModule } from './graphql.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
     declarations: [
@@ -20,7 +22,9 @@ import { FooterModule } from './features/commons/footer/footer.module';
         PagesModule,
         CommonsModule,
         HeaderModule,
-        FooterModule
+        FooterModule,
+        GraphQLModule,
+        HttpClientModule
     ]
 })
 export class AppModule { }

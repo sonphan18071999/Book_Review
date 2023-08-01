@@ -1,0 +1,23 @@
+.start__exploring{
+    width: calc(100% - 460px);
+    margin: auto;
+    margin-top: 60px;
+
+    &-title{
+        @include flex-display();
+        text-align: left;
+        height: 70px;
+
+        .decorator{
+            height: 100%;
+            width: 5px;
+            background-color: black;
+            margin-right: 1rem;
+        }
+    }
+
+    &-books{
+        @include grid-display(1fr 1fr 1fr 1fr 1fr);
+        margin-top: 20px;
+    }
+}

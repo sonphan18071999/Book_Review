@@ -1,0 +1,67 @@
+.most-interested__book {
+  @include grid-display();
+  width: calc(100% - 460px);
+  margin: auto; 
+
+  .interest__book {
+    @include flex-display(null, null, center);
+    width: 407px;
+    height: 100%;
+    margin-top: 20px;
+    
+    &-cover {
+      @include flex-display();
+      height: 100%;
+      max-height: 240px;
+      transform: rotate(-3.5deg);
+      z-index: 2;
+
+      &-image {
+        width: calc(100% - 1rem);
+        max-width: 164px;
+        border-radius: 10px;
+        box-shadow: 8px 0px #888888;
+        z-index: 2;
+      }
+
+      &-background {
+        padding: 0;
+        margin: 0;
+        width: 1rem;
+        height: 100%;
+        background-color: white;
+        box-shadow: 4px 0px #ffffff;
+        border-radius: 10px;
+      }
+    }
+
+    &-section {
+      position: relative;
+      left: -50px;
+      max-width: 206px;
+      max-height: 180px;
+      background-color: $color05;
+      padding: 10px;
+      border-radius: 0 5px 5px 0;
+      color: white;
+
+      &-content {
+        width: calc(100% - 50px);
+        margin-left: auto;
+      }
+
+      &-button{
+        @include border-style(0, null, solid, white);
+        background-color: transparent;
+        color: white;
+        font-size: 11px;
+        height: 20px;
+        padding: 0 25px;
+      }
+
+      &-button:hover{
+        cursor: pointer;
+      }
+    }
+  }
+}

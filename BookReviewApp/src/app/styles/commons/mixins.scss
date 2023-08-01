@@ -23,10 +23,8 @@
   flex-wrap: $flex-wrap;
 }
 
-
-@mixin grid-display($rows, $columns, $cell-width, $cell-height, $cell-gap) {
+@mixin grid-display($grid-template-columns: 1fr 1fr 1fr, $grid-gap: 10px) {
   display: grid;
-  grid-template-rows: repeat(#{$rows}, #{$cell-height});
-  grid-template-columns: repeat(#{$columns}, #{$cell-width});
-  gap: #{$cell-gap};
+  grid-template-columns: $grid-template-columns;
+  grid-gap: $grid-gap;
 }
