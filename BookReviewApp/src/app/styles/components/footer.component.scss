@@ -1,0 +1,8 @@
+.footer {
+    @include flex-display(null, center, center);
+    width: 100%;
+    background-color: grey;
+    color: white;
+    height: 60px;
+    margin-top: 20px;
+}
