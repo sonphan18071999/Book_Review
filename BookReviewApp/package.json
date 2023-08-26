@@ -6,7 +6,8 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "generate": "graphql-codegen codegen"
   },
   "private": true,
   "dependencies": {
@@ -24,8 +25,9 @@
     "@ngrx/store": "^16.1.0",
     "apollo-angular": "^5.0.0",
     "contentful": "^10.1.2",
-    "graphql": "^16",
+    "graphql": "^16.8.0",
     "ng": "^0.0.0",
+    "react": "^18.2.0",
     "rxjs": "~7.5.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.12.0"
@@ -34,7 +36,14 @@
     "@angular-devkit/build-angular": "^15.0.2",
     "@angular/cli": "~15.0.2",
     "@angular/compiler-cli": "^15.0.0",
+    "@graphql-codegen/cli": "^5.0.0",
+    "@graphql-codegen/typescript": "^4.0.1",
+    "@graphql-codegen/typescript-apollo-angular": "^3.5.6",
+    "@graphql-codegen/typescript-operations": "^4.0.1",
+    "@types/graphql": "^14.5.0",
     "@types/jasmine": "~4.3.0",
+    "@types/react": "^18.2.21",
+    "apollo": "^2.34.0",
     "jasmine-core": "~4.5.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
