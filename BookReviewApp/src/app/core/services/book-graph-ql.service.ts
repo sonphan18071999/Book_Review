@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Apollo } from 'apollo-angular';
 import {
-  Book,
-  GetBookByTitleDocument,
+  Book, GetBooksByTitleDocument,
 } from '../graphql/code-generated/generated';
 
 @Injectable({
@@ -15,7 +14,10 @@ export class BookGraphQLService {
     const books = [] as Book[];
     this.apollo
       .watchQuery({
-        query: GetBookByTitleDocument,
+        query: GetBooksByTitleDocument,
+        variables: {
+          title: title,
+        },
       })
       .valueChanges.subscribe(({ data, error }: any) => {
         console.log('book retrieves', data);

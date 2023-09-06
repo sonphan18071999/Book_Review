@@ -8,6 +8,6 @@ import { BookGraphQLService } from 'src/app/core/services';
 export class HomepageComponent implements OnInit{
   constructor(private bookGraphQLService: BookGraphQLService) {}
   ngOnInit(): void {
-    this.bookGraphQLService.getBookByTitle("Blind Justice");
+    this.bookGraphQLService.getBookByTitle("Blind");
   }
 }

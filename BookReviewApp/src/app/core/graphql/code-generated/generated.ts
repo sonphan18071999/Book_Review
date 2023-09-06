@@ -15,22 +15,18 @@ export type Scalars = {
   Boolean: { input: boolean; output: boolean; }
   Int: { input: number; output: number; }
   Float: { input: number; output: number; }
-  Binary: { input: any; output: any; }
+  /** Date in ISO */
   Date: { input: any; output: any; }
+  /** URI for assets */
+  URI: { input: any; output: any; }
+  /** The `Upload` scalar type represents a file upload. */
+  Upload: { input: any; output: any; }
 };
 
-export type Author = {
-  __typename?: 'Author';
-  bio?: Maybe<Scalars['String']['output']>;
-  books: Array<Maybe<Book>>;
-  created_at: Scalars['Date']['output'];
-  updated_at: Scalars['Date']['output'];
-  user?: Maybe<User>;
-};
-
+/** Book data representation */
 export type Book = {
   __typename?: 'Book';
-  cover_image?: Maybe<Scalars['Binary']['output']>;
+  cover_image?: Maybe<Scalars['URI']['output']>;
   created_at: Scalars['Date']['output'];
   description?: Maybe<Scalars['String']['output']>;
   genres?: Maybe<Array<Maybe<Genre>>>;
@@ -42,6 +38,7 @@ export type Book = {
   updated_at: Scalars['Date']['output'];
 };
 
+/** Genre data representation */
 export type Genre = {
   __typename?: 'Genre';
   alias?: Maybe<Scalars['String']['output']>;
@@ -53,66 +50,132 @@ export type Genre = {
   updated_at: Scalars['Date']['output'];
 };
 
+export type Mutation = {
+  __typename?: 'Mutation';
+  /** Create Genre - Book relation */
+  addBookToGenre: Genre;
+  /** Create a new Book record */
+  createBook: Book;
+  /** Create a new Genre record */
+  createGenre: Genre;
+  /** Remove Genre - Book relation */
+  removeBookFromGenre: Genre;
+  /**
+   * Upload a book's cover_image which contain in a multipart/form-data
+   * need to provide a non-empty value for one of the following headers: x-apollo-operation-name, apollo-require-preflight
+   */
+  uploadBookCoverImage?: Maybe<UploadResult>;
+};
+
+
+export type MutationAddBookToGenreArgs = {
+  bookId: Scalars['ID']['input'];
+  genreId: Scalars['ID']['input'];
+};
+
+
+export type MutationCreateBookArgs = {
+  description?: InputMaybe<Scalars['String']['input']>;
+  publish_date?: InputMaybe<Scalars['Date']['input']>;
+  publisher?: InputMaybe<Scalars['String']['input']>;
+  title: Scalars['String']['input'];
+};
+
+
+export type MutationCreateGenreArgs = {
+  alias?: InputMaybe<Scalars['String']['input']>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  name: Scalars['String']['input'];
+};
+
+
+export type MutationRemoveBookFromGenreArgs = {
+  bookId: Scalars['ID']['input'];
+  genreId: Scalars['ID']['input'];
+};
+
+
+export type MutationUploadBookCoverImageArgs = {
+  bookId: Scalars['ID']['input'];
+  cover_image: Scalars['Upload']['input'];
+};
+
 export type Query = {
   __typename?: 'Query';
-  bookById?: Maybe<Book>;
-  bookByTitle?: Maybe<Book>;
-  genreById?: Maybe<Genre>;
-  genreByName?: Maybe<Genre>;
+  /** Get a book's detail by its id */
+  bookById: Book;
+  /** Get a list of books by search with its title which contains the provided string */
+  booksByTitle: Array<Maybe<Book>>;
+  /** Get the most recent published book with an optional offset. Default maxItems is 10 and default offet is 0 */
+  booksPublishedLatest: Array<Book>;
+  /** Get a genre's details by its id */
+  genreById: Genre;
+  /** Get a list of genres by search with its name which contains the provied string */
+  genresByName: Array<Maybe<Genre>>;
 };
 
 
 export type QueryBookByIdArgs = {
-  id?: InputMaybe<Scalars['ID']['input']>;
+  id: Scalars['ID']['input'];
 };
 
 
-export type QueryBookByTitleArgs = {
-  title?: InputMaybe<Scalars['String']['input']>;
+export type QueryBooksByTitleArgs = {
+  title: Scalars['String']['input'];
+};
+
+
+export type QueryBooksPublishedLatestArgs = {
+  maxItems?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
 };
 
 
 export type QueryGenreByIdArgs = {
-  id?: InputMaybe<Scalars['ID']['input']>;
+  id: Scalars['ID']['input'];
 };
 
 
-export type QueryGenreByNameArgs = {
-  name?: InputMaybe<Scalars['String']['input']>;
+export type QueryGenresByNameArgs = {
+  name: Scalars['String']['input'];
 };
 
-export type User = {
-  __typename?: 'User';
-  avatar?: Maybe<Scalars['Binary']['output']>;
-  created_at: Scalars['Date']['output'];
-  date_of_birth?: Maybe<Scalars['Date']['output']>;
-  email: Scalars['String']['output'];
-  full_name?: Maybe<Scalars['String']['output']>;
-  read_books: Array<Maybe<Book>>;
-  updated_at: Scalars['Date']['output'];
+export type UploadResult = {
+  __typename?: 'UploadResult';
+  book?: Maybe<Book>;
+  message?: Maybe<Scalars['String']['output']>;
+  success: Scalars['Boolean']['output'];
 };
 
-export type GetBookByTitleQueryVariables = Exact<{
-  title?: InputMaybe<Scalars['String']['input']>;
+export type GetBooksByTitleQueryVariables = Exact<{
+  title: Scalars['String']['input'];
 }>;
 
 
-export type GetBookByTitleQuery = { __typename?: 'Query', bookByTitle?: { __typename?: 'Book', title: string, rating?: number | null, publisher?: string | null, publish_date?: any | null } | null };
+export type GetBooksByTitleQuery = { __typename?: 'Query', booksByTitle: Array<{ __typename?: 'Book', title: string, publisher?: string | null, rating?: number | null, id: string } | null> };
 
 export type GetBookByIdQueryVariables = Exact<{
-  bookByIdId?: InputMaybe<Scalars['ID']['input']>;
+  bookByIdId: Scalars['ID']['input'];
 }>;
 
 
-export type GetBookByIdQuery = { __typename?: 'Query', bookById?: { __typename?: 'Book', title: string, rating?: number | null, publisher?: string | null } | null };
+export type GetBookByIdQuery = { __typename?: 'Query', bookById: { __typename?: 'Book', title: string, updated_at: any, rating?: number | null, publish_date?: any | null } };
 
-export const GetBookByTitleDocument = gql`
-    query getBookByTitle($title: String) {
-  bookByTitle(title: $title) {
+export type GetBooksPublishedLatestQueryVariables = Exact<{
+  maxItems?: InputMaybe<Scalars['Int']['input']>;
+  offset?: InputMaybe<Scalars['Int']['input']>;
+}>;
+
+
+export type GetBooksPublishedLatestQuery = { __typename?: 'Query', booksPublishedLatest: Array<{ __typename?: 'Book', title: string, publisher?: string | null, rating?: number | null, publish_date?: any | null, id: string }> };
+
+export const GetBooksByTitleDocument = gql`
+    query getBooksByTitle($title: String!) {
+  booksByTitle(title: $title) {
     title
-    rating
     publisher
-    publish_date
+    rating
+    id
   }
 }
     `;
@@ -120,19 +183,20 @@ export const GetBookByTitleDocument = gql`
   @Injectable({
     providedIn: 'root'
   })
-  export class GetBookByTitleGQL extends Apollo.Query<GetBookByTitleQuery, GetBookByTitleQueryVariables> {
-    override document = GetBookByTitleDocument;
+  export class GetBooksByTitleGQL extends Apollo.Query<GetBooksByTitleQuery, GetBooksByTitleQueryVariables> {
+    override document = GetBooksByTitleDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);
     }
   }
 export const GetBookByIdDocument = gql`
-    query getBookById($bookByIdId: ID) {
+    query getBookById($bookByIdId: ID!) {
   bookById(id: $bookByIdId) {
     title
+    updated_at
     rating
-    publisher
+    publish_date
   }
 }
     `;
@@ -142,6 +206,28 @@ export const GetBookByIdDocument = gql`
   })
   export class GetBookByIdGQL extends Apollo.Query<GetBookByIdQuery, GetBookByIdQueryVariables> {
     override document = GetBookByIdDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const GetBooksPublishedLatestDocument = gql`
+    query getBooksPublishedLatest($maxItems: Int, $offset: Int) {
+  booksPublishedLatest(maxItems: $maxItems, offset: $offset) {
+    title
+    publisher
+    rating
+    publish_date
+    id
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetBooksPublishedLatestGQL extends Apollo.Query<GetBooksPublishedLatestQuery, GetBooksPublishedLatestQueryVariables> {
+    override document = GetBooksPublishedLatestDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

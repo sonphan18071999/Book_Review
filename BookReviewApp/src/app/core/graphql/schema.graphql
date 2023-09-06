@@ -1,33 +1,62 @@
-# This define schema for codegen generate type as scalar
-type Query {
-  bookByTitle(title: String): Book
-  bookById(id: ID): Book
-  genreByName(name: String): Genre
-  genreById(id: ID): Genre
-}
-
+"""Date in ISO"""
 scalar Date
 
-scalar Binary
+"""URI for assets"""
+scalar URI
 
-type User {
-  full_name: String
-  email: String!
-  date_of_birth: Date
-  avatar: Binary
-  read_books: [Book]!
-  created_at: Date!
-  updated_at: Date!
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+type Query {
+  """
+  Get a list of books by search with its title which contains the provided string
+  """
+  booksByTitle(title: String!): [Book]!
+
+  """Get a book's detail by its id"""
+  bookById(id: ID!): Book!
+
+  """
+  Get the most recent published book with an optional offset. Default maxItems is 10 and default offet is 0
+  """
+  booksPublishedLatest(maxItems: Int, offset: Int): [Book!]!
+
+  """
+  Get a list of genres by search with its name which contains the provied string
+  """
+  genresByName(name: String!): [Genre]!
+
+  """Get a genre's details by its id"""
+  genreById(id: ID!): Genre!
 }
 
-type Author {
-  bio: String
-  user: User
-  books: [Book]!
-  created_at: Date!
-  updated_at: Date!
+type Mutation {
+  """Create a new Book record"""
+  createBook(title: String!, description: String, publish_date: Date, publisher: String): Book!
+
+  """Create a new Genre record"""
+  createGenre(name: String!, description: String, alias: String): Genre!
+
+  """Create Genre - Book relation"""
+  addBookToGenre(genreId: ID!, bookId: ID!): Genre!
+
+  """Remove Genre - Book relation"""
+  removeBookFromGenre(genreId: ID!, bookId: ID!): Genre!
+
+  """
+  Upload a book's cover_image which contain in a multipart/form-data
+  need to provide a non-empty value for one of the following headers: x-apollo-operation-name, apollo-require-preflight
+  """
+  uploadBookCoverImage(cover_image: Upload!, bookId: ID!): UploadResult
 }
 
+type UploadResult {
+  success: Boolean!
+  message: String
+  book: Book
+}
+
+"""Book data representation"""
 type Book {
   id: ID!
   title: String!
@@ -35,12 +64,13 @@ type Book {
   rating: Float
   publish_date: Date
   publisher: String
-  cover_image: Binary
+  cover_image: URI
   created_at: Date!
   updated_at: Date!
   genres: [Genre]
 }
 
+"""Genre data representation"""
 type Genre {
   id: ID!
   name: String!
