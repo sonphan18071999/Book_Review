@@ -1,0 +1,16 @@
+.pagination{
+    @include grid-display();
+    margin: auto;
+
+    &__button{
+      @include round-button(transparent, black);
+    }
+
+    &-count{
+      text-align: center;
+    }
+
+    &-btn-right{
+      margin-left: auto;
+    }
+  }

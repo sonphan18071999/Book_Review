@@ -35,8 +35,8 @@ import { InMemoryCache } from '@apollo/client';
     imports: [
         BrowserModule,
         AppRoutingModule,
-        PagesModule,
         CommonsModule,
+        PagesModule,
         HeaderModule,
         FooterModule,
         GraphQLModule,

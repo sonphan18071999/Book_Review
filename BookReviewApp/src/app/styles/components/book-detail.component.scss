@@ -1,4 +1,11 @@
-.book__detail-content{
-   @include border-style();
-   padding: 1rem;
+.book__detail {
+
+   &-author-vote{
+      @include grid-display(1fr 1fr);
+   }
+
+  .book__detail-content {
+    @include border-style();
+    padding: 1rem;
+  }
 }
