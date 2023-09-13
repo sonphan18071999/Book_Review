@@ -1,0 +1,17 @@
+<app-section-title [title]="'Rating Point'" />
+<div class="rate">
+  <div class="rate__point">
+    <h3>4.7</h3>
+    <p>( 40 Members )</p>
+  </div>
+  <div class="rate__stars">
+    <div class="rate__stars-item" *ngFor="let item of overalRates">
+      <img src="assets/images/icons/icon_star_yellow.svg" />
+    </div>
+    <div class="rate__stars-detail">
+      <div>
+        
+      </div>
+    </div>
+  </div>
+</div>

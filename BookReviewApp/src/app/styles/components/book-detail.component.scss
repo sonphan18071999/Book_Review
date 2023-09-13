@@ -1,11 +1,37 @@
 .book__detail {
+  max-width: 80%;
+  margin: auto;
 
-   &-author-vote{
-      @include grid-display(1fr 1fr);
-   }
+  &-title {
+    margin-top: 2rem;
+  }
 
-  .book__detail-content {
+  &-author-vote {
+    @include grid-display(1fr 1fr);
+    margin: 1rem 0;
+    height: 76px;
+    overflow: hidden;
+
+    app-vote {
+      @include flex-display();
+    }
+  }
+
+  &-cover-overall-info {
+    @include flex-display();
+    
+    img {
+      @include border-style(5px, 1px, solid, transparent);
+    }
+
+    .overal__rating{
+      margin-left: 1rem;
+    }
+  }
+
+  &-content {
     @include border-style();
+    margin-top: 2rem;
     padding: 1rem;
   }
 }

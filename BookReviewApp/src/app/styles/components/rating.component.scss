@@ -1,0 +1,12 @@
+.rate {
+  @include flex-display();
+
+  &__point {
+    width: 10rem;
+    text-align: center;
+  }
+
+  &__stars{
+    @include grid-display(1fr 1fr 1fr 1fr 1fr);
+  }
+}

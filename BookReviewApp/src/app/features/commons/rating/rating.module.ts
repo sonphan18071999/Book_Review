@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { UserComponent } from './user.component';
+import { RatingComponent } from '../rating/rating.component';
 import { SectionTitleModule } from '../section-title/section-title.module';
 
 @NgModule({
   declarations: [
-    UserComponent
+    RatingComponent
   ],
   imports: [
     CommonModule,
     SectionTitleModule
   ],
   exports:[
-    UserComponent
+    RatingComponent
   ]
 })
-export class UserModule { }
+export class RatingModule { }

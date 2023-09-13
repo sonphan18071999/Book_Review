@@ -1,0 +1,21 @@
+<div class="section__title section-header">
+  <h3
+    [ngStyle]="
+      showWithAvatar
+        ? {
+            'padding-left': '20px',
+            'padding-right': '20px',
+            'padding-top': '15px'
+          }
+        : {
+          'margin-left':'0px',
+          'padding-left': '2rem',
+          'padding-right': '2rem',
+          'display':'flex',
+          'align-items':'center'
+        }
+    "
+  >
+    <b>{{ title }}</b>
+  </h3>
+</div>

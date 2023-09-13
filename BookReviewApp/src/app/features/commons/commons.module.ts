@@ -6,7 +6,6 @@ import { PaginationModule } from './pagination/pagination.module';
 
 @NgModule({
   declarations: [
-  
   ],
   imports: [
     CommonModule,

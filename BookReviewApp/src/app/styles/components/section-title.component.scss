@@ -1,0 +1,12 @@
+.section__title {
+  @include flex-display(null,null);
+  height: 60px;
+  border-radius: 30px;
+  background-color: $color06;
+  margin-bottom: 1rem;
+  
+  h3 {
+    margin: 0;
+    margin-left: 40px;
+  }
+}

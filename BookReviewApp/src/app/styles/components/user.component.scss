@@ -1,16 +1,24 @@
-.user{
-    @include flex-display(null,null, center);
-    
-    &__container{
-        margin-right: 1rem;
-        margin-left: 1rem;
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
-        overflow: hidden;
+.user {
+  @include flex-display(null, null);
+  max-height: 60px;
+  overflow: hidden;
 
-        img{
-            margin: auto;
-        }
+  &__container {
+    margin-right: 1rem;
+    width: 60px;
+
+    img {
+    @include border-style(50%,1px, solid);
+      width: 98%;
+      height: 95%;
     }
+  }
+
+  app-section-title {
+    position: relative;
+    top: 0;
+    left: calc(-1rem - 50px);
+    height: 60px;
+    z-index: -1;
+  }
 }

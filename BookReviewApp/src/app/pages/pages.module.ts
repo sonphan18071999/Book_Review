@@ -7,6 +7,8 @@ import { CommonsModule } from '../features/commons/commons.module';
 import { PaginationModule } from "../features/commons/pagination/pagination.module";
 import { UserModule } from '../features/commons/user/user.module';
 import { VoteModule } from "../features/commons/vote/vote.module";
+import { BookOveralInformationModule } from '../features/components/book-overal-information/book-overal-information.module';
+import { RatingModule } from '../features/commons/rating/rating.module';
 
 @NgModule({
     declarations: [
@@ -19,7 +21,9 @@ import { VoteModule } from "../features/commons/vote/vote.module";
         RouterModule,
         PaginationModule,
         UserModule,
-        VoteModule
+        VoteModule,
+        BookOveralInformationModule,
+        RatingModule
     ]
 })
 export class PagesModule { }

@@ -1,0 +1,12 @@
+@mixin font-size($size) {
+  font-size: $size;
+  line-height: 1.5;
+}
+
+.header {
+  @include font-size(32px);
+}
+
+.section-header {
+  @include font-size(28px);
+}
