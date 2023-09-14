@@ -1,12 +1,29 @@
 .rate {
   @include flex-display();
 
-  &__point {
-    width: 10rem;
-    text-align: center;
-  }
+  &__stars {
+    display: block;
 
-  &__stars{
-    @include grid-display(1fr 1fr 1fr 1fr 1fr);
+    &-overal {
+      @include flex-display();
+
+      &-point {
+        width: 10rem;
+        text-align: center;
+      }
+    }
+
+    &-detail-point{
+      @include flex-display(null, center, center);
+      width: 10rem;
+    }
+
+    &-icon{
+      margin-right: 1rem
+    }
+
+    &-item {
+      @include grid-display(1fr 1fr 1fr 1fr 1fr);
+    }
   }
 }

@@ -1,16 +1,38 @@
 <app-section-title [title]="'Rating Point'" />
 <div class="rate">
-  <div class="rate__point">
-    <h3>4.7</h3>
-    <p>( 40 Members )</p>
-  </div>
   <div class="rate__stars">
-    <div class="rate__stars-item" *ngFor="let item of overalRates">
-      <img src="assets/images/icons/icon_star_yellow.svg" />
+    <div class="rate__stars-overal">
+      <div class="rate__stars-overal-point">
+        <h3><b>4.7</b></h3>
+        <p><i>( 40 Members )</i></p>
+      </div>
+      <div class="rate__stars-item">
+        <img
+          *ngFor="let item of overalRates.rate.yellow | keyvalue"
+          src="assets/images/icons/icon_star_yellow.svg"
+        />
+      </div>
     </div>
     <div class="rate__stars-detail">
-      <div>
-        
+      <div
+        *ngFor="let rate of cdkStarConfig; let index = index"
+        [ngStyle]="{ display: 'flex' }"
+      >
+        <div class="rate__stars-detail-point">Rate point</div>
+        <div *ngFor="let star of rate.rate.yellow" class="rate__stars-icon">
+          <img
+            width="32px"
+            height="30px"
+            src="assets/images/icons/icon_star_yellow.svg"
+          />
+        </div>
+        <div *ngFor="let star of rate.rate.grey" class="rate__stars-icon">
+          <img
+            width="32px"
+            height="30px"
+            src="assets/images/icons/icon_star_grey.svg"
+          />
+        </div>
       </div>
     </div>
   </div>

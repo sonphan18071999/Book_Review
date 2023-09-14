@@ -9,6 +9,7 @@ import { UserModule } from '../features/commons/user/user.module';
 import { VoteModule } from "../features/commons/vote/vote.module";
 import { BookOveralInformationModule } from '../features/components/book-overal-information/book-overal-information.module';
 import { RatingModule } from '../features/commons/rating/rating.module';
+import { BookDescriptionReviewModule } from '../features/components/book-description-review/book-description-review.module';
 
 @NgModule({
     declarations: [
@@ -23,7 +24,8 @@ import { RatingModule } from '../features/commons/rating/rating.module';
         UserModule,
         VoteModule,
         BookOveralInformationModule,
-        RatingModule
+        RatingModule,
+        BookDescriptionReviewModule
     ]
 })
 export class PagesModule { }

@@ -28,10 +28,4 @@
       margin-left: 1rem;
     }
   }
-
-  &-content {
-    @include border-style();
-    margin-top: 2rem;
-    padding: 1rem;
-  }
 }

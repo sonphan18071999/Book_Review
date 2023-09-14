@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, KeyValuePipe } from '@angular/common';
 import { RatingComponent } from '../rating/rating.component';
 import { SectionTitleModule } from '../section-title/section-title.module';
 
@@ -9,7 +9,8 @@ import { SectionTitleModule } from '../section-title/section-title.module';
   ],
   imports: [
     CommonModule,
-    SectionTitleModule
+    SectionTitleModule,
+    KeyValuePipe
   ],
   exports:[
     RatingComponent
