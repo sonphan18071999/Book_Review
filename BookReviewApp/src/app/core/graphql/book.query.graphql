@@ -42,5 +42,6 @@ query getBooksPublishedLatest($maxItems: Int, $offset: Int) {
     id
     cover_image
     rating
+    description
   }
 }

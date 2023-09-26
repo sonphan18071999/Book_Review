@@ -1,13 +1,9 @@
-import { Component, OnInit } from '@angular/core';
-import { BookGraphQLService } from 'src/app/core/services';
+import { Component, OnDestroy, OnInit, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+
 
 @Component({
   selector: 'app-homepage',
-  templateUrl: './homepage.component.html',
+  templateUrl: './homepage.component.html'
 })
-export class HomepageComponent implements OnInit{
-  constructor(private bookGraphQLService: BookGraphQLService) {}
-  ngOnInit(): void {
-    this.bookGraphQLService.getBookByTitle("Blind");
-  }
+export class HomepageComponent  {
 }

@@ -182,7 +182,7 @@ export type GetBooksPublishedLatestQueryVariables = Exact<{
 }>;
 
 
-export type GetBooksPublishedLatestQuery = { __typename?: 'Query', booksPublishedLatest: Array<{ __typename?: 'Book', title: string, publisher?: string | null, rating?: number | null, publish_date?: any | null, id: string, cover_image?: any | null }> };
+export type GetBooksPublishedLatestQuery = { __typename?: 'Query', booksPublishedLatest: Array<{ __typename?: 'Book', title: string, publisher?: string | null, rating?: number | null, publish_date?: any | null, id: string, cover_image?: any | null, description?: string | null }> };
 
 export type UploadBookCoverImageMutationVariables = Exact<{
   coverImage: Scalars['Upload']['input'];
@@ -293,6 +293,7 @@ export const GetBooksPublishedLatestDocument = gql`
     id
     cover_image
     rating
+    description
   }
 }
     `;

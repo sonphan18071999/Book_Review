@@ -33,17 +33,14 @@ export class BookGraphQLService {
     return books;
   }
 
-  getMostInterestedBooks(maxItems: number, offet: number): Book[] {
-    const books = [] as Book[];
-    this.apollo
-      .watchQuery({
-        query: GetBooksPublishedLatestDocument,
-      })
-      .valueChanges.subscribe(({ data, error }: any) => {
-        // console.log('book retrieves', data);
-      });
-
-    return books;
+  getMostInterestedBooks(maxItems: number, offset: number): Observable<ApolloQueryResult<GetBooksPublishedLatestQuery>> {
+    return this.apollo.watchQuery<GetBooksPublishedLatestQuery>({
+      query: GetBooksPublishedLatestDocument,
+      variables: {
+        maxItems,
+        offset
+      },
+    }).valueChanges;
   }
 
   getAllBooksByPage(maxItems: number, offset: number): Observable<ApolloQueryResult<GetBooksPublishedLatestQuery>> {
