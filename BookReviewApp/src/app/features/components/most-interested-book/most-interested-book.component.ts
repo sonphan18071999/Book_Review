@@ -18,7 +18,6 @@ export class MostInterestedBookComponent implements OnInit, OnDestroy{
   ngOnInit(): void {
     this.bookGraphQLService.getMostInterestedBooks(3,1).subscribe(res=>{
       this.books = [...res.data.booksPublishedLatest];
-      console.log(this.books)
     });
   }
 

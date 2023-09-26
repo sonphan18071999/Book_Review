@@ -14,8 +14,9 @@ export class StartExploringComponent implements OnInit {
   constructor(protected bookGraphQLService: BookGraphQLService, protected router: Router) {}
 
   ngOnInit(): void {
-    this.bookGraphQLService.getAllBooksByPage(10,0).subscribe(res=>{
+    this.bookGraphQLService.getAllBooksByPage(15,5).subscribe(res=>{
       this.books = res.data.booksPublishedLatest;
+      console.log(this.books)
     })  
   }
 
