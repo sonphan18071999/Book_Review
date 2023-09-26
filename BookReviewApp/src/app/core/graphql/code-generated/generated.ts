@@ -147,6 +147,14 @@ export type UploadResult = {
   success: Scalars['Boolean']['output'];
 };
 
+export type CreateBookDisplayForHomePageMutationVariables = Exact<{
+  title: Scalars['String']['input'];
+  description?: InputMaybe<Scalars['String']['input']>;
+}>;
+
+
+export type CreateBookDisplayForHomePageMutation = { __typename?: 'Mutation', createBook: { __typename?: 'Book', id: string, title: string, description?: string | null } };
+
 export type GetBooksByTitleQueryVariables = Exact<{
   title: Scalars['String']['input'];
 }>;
@@ -159,7 +167,14 @@ export type GetBookByIdQueryVariables = Exact<{
 }>;
 
 
-export type GetBookByIdQuery = { __typename?: 'Query', bookById: { __typename?: 'Book', title: string, updated_at: any, rating?: number | null, publish_date?: any | null } };
+export type GetBookByIdQuery = { __typename?: 'Query', bookById: { __typename?: 'Book', cover_image?: any | null, description?: string | null, id: string, publish_date?: any | null, publisher?: string | null, rating?: number | null, title: string } };
+
+export type GetBookByIdForDetailQueryVariables = Exact<{
+  bookByIdId: Scalars['ID']['input'];
+}>;
+
+
+export type GetBookByIdForDetailQuery = { __typename?: 'Query', bookById: { __typename?: 'Book', title: string, updated_at: any, description?: string | null, rating?: number | null, publish_date?: any | null, genres?: Array<{ __typename?: 'Genre', id: string, name: string } | null> | null } };
 
 export type GetBooksPublishedLatestQueryVariables = Exact<{
   maxItems?: InputMaybe<Scalars['Int']['input']>;
@@ -167,8 +182,36 @@ export type GetBooksPublishedLatestQueryVariables = Exact<{
 }>;
 
 
-export type GetBooksPublishedLatestQuery = { __typename?: 'Query', booksPublishedLatest: Array<{ __typename?: 'Book', title: string, publisher?: string | null, rating?: number | null, publish_date?: any | null, id: string }> };
+export type GetBooksPublishedLatestQuery = { __typename?: 'Query', booksPublishedLatest: Array<{ __typename?: 'Book', title: string, publisher?: string | null, rating?: number | null, publish_date?: any | null, id: string, cover_image?: any | null }> };
 
+export type UploadBookCoverImageMutationVariables = Exact<{
+  coverImage: Scalars['Upload']['input'];
+  bookId: Scalars['ID']['input'];
+}>;
+
+
+export type UploadBookCoverImageMutation = { __typename?: 'Mutation', uploadBookCoverImage?: { __typename?: 'UploadResult', book?: { __typename?: 'Book', id: string, title: string, description?: string | null, created_at: any, updated_at: any } | null } | null };
+
+export const CreateBookDisplayForHomePageDocument = gql`
+    mutation createBookDisplayForHomePage($title: String!, $description: String) {
+  createBook(title: $title, description: $description) {
+    id
+    title
+    description
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class CreateBookDisplayForHomePageGQL extends Apollo.Mutation<CreateBookDisplayForHomePageMutation, CreateBookDisplayForHomePageMutationVariables> {
+    override document = CreateBookDisplayForHomePageDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetBooksByTitleDocument = gql`
     query getBooksByTitle($title: String!) {
   booksByTitle(title: $title) {
@@ -193,10 +236,13 @@ export const GetBooksByTitleDocument = gql`
 export const GetBookByIdDocument = gql`
     query getBookById($bookByIdId: ID!) {
   bookById(id: $bookByIdId) {
-    title
-    updated_at
-    rating
+    cover_image
+    description
+    id
     publish_date
+    publisher
+    rating
+    title
   }
 }
     `;
@@ -211,6 +257,32 @@ export const GetBookByIdDocument = gql`
       super(apollo);
     }
   }
+export const GetBookByIdForDetailDocument = gql`
+    query getBookByIdForDetail($bookByIdId: ID!) {
+  bookById(id: $bookByIdId) {
+    title
+    updated_at
+    description
+    rating
+    publish_date
+    genres {
+      id
+      name
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class GetBookByIdForDetailGQL extends Apollo.Query<GetBookByIdForDetailQuery, GetBookByIdForDetailQueryVariables> {
+    override document = GetBookByIdForDetailDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const GetBooksPublishedLatestDocument = gql`
     query getBooksPublishedLatest($maxItems: Int, $offset: Int) {
   booksPublishedLatest(maxItems: $maxItems, offset: $offset) {
@@ -219,6 +291,8 @@ export const GetBooksPublishedLatestDocument = gql`
     rating
     publish_date
     id
+    cover_image
+    rating
   }
 }
     `;
@@ -228,6 +302,30 @@ export const GetBooksPublishedLatestDocument = gql`
   })
   export class GetBooksPublishedLatestGQL extends Apollo.Query<GetBooksPublishedLatestQuery, GetBooksPublishedLatestQueryVariables> {
     override document = GetBooksPublishedLatestDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
+export const UploadBookCoverImageDocument = gql`
+    mutation uploadBookCoverImage($coverImage: Upload!, $bookId: ID!) {
+  uploadBookCoverImage(cover_image: $coverImage, bookId: $bookId) {
+    book {
+      id
+      title
+      description
+      created_at
+      updated_at
+    }
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class UploadBookCoverImageGQL extends Apollo.Mutation<UploadBookCoverImageMutation, UploadBookCoverImageMutationVariables> {
+    override document = UploadBookCoverImageDocument;
     
     constructor(apollo: Apollo.Apollo) {
       super(apollo);

@@ -9,10 +9,27 @@ query getBooksByTitle($title: String!) {
 
 query getBookById($bookByIdId: ID!) {
   bookById(id: $bookByIdId) {
+   cover_image
+    description
+    id
+    publish_date
+    publisher
+    rating
+    title
+  }
+}
+
+query getBookByIdForDetail($bookByIdId: ID!) {
+  bookById(id: $bookByIdId) {
     title
     updated_at
+    description
     rating
     publish_date
+        genres {
+      id
+      name
+    }
   }
 }
 
@@ -23,5 +40,7 @@ query getBooksPublishedLatest($maxItems: Int, $offset: Int) {
     rating
     publish_date
     id
+    cover_image
+    rating
   }
 }

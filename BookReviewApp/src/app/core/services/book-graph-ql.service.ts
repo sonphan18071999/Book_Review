@@ -1,8 +1,15 @@
 import { Injectable } from '@angular/core';
-import { Apollo } from 'apollo-angular';
+import { Apollo, Query, QueryRef } from 'apollo-angular';
 import {
-  Book, GetBooksByTitleDocument,
+  Book,
+  GetBookByIdDocument,
+  GetBookByIdQuery,
+  GetBooksByTitleDocument,
+  GetBooksPublishedLatestDocument,
+  GetBooksPublishedLatestQuery
 } from '../graphql/code-generated/generated';
+import { Observable, Subscription, map, pipe } from 'rxjs';
+import { ApolloQueryResult } from '@apollo/client';
 
 @Injectable({
   providedIn: 'root',
@@ -20,9 +27,42 @@ export class BookGraphQLService {
         },
       })
       .valueChanges.subscribe(({ data, error }: any) => {
-        console.log('book retrieves', data);
+        // console.log('book retrieves', data);
       });
 
     return books;
   }
+
+  getMostInterestedBooks(maxItems: number, offet: number): Book[] {
+    const books = [] as Book[];
+    this.apollo
+      .watchQuery({
+        query: GetBooksPublishedLatestDocument,
+      })
+      .valueChanges.subscribe(({ data, error }: any) => {
+        // console.log('book retrieves', data);
+      });
+
+    return books;
+  }
+
+  getAllBooksByPage(maxItems: number, offset: number): Observable<ApolloQueryResult<GetBooksPublishedLatestQuery>> {
+    return this.apollo.watchQuery<GetBooksPublishedLatestQuery>({
+      query: GetBooksPublishedLatestDocument,
+      variables: {
+        maxItems,
+        offset
+      },
+    }).valueChanges;
+  }
+
+  getBookById(id: string): Observable<ApolloQueryResult<GetBookByIdQuery>>{
+    return this.apollo.watchQuery<GetBookByIdQuery>({
+      query: GetBookByIdDocument,
+      variables: {
+        bookByIdId: id
+      },
+    }).valueChanges;
+  }
+
 }

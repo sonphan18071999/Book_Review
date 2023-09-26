@@ -1,6 +1,6 @@
 <div class="book__detail">
   <div class="book__detail-title">
-    <h2>Review: Harry Potter and the Half - Blood Prince</h2>
+    <h2>{{book.title}}</h2>
     <hr />
     <div class="book__detail-author-vote">
       <app-user />
@@ -8,17 +8,17 @@
     </div>
     <div class="book__detail-cover-overall-info">
       <img
-        src="https://play-lh.googleusercontent.com/BsTNbp2qk09yqmDkqNrbTZhq0uPT6x0B7L49jdCfUxFKGkLZlvJsrQnP7FSV8UDhjrQn"
+        [src]="book.cover_image"
         alt="Book cover"
+        width="30%"
       />
       <div class="overal__rating">
-          <app-book-overal-information/>
+          <app-book-overal-information [bookDetail]="book"/>
           <app-rating/>
       </div>
     </div>
-
     <div class="book__detail-description">
-      <app-book-description-review/>
+      <app-book-description-review [description]="book.description"></app-book-description-review>
     </div>
   </div>
 </div>

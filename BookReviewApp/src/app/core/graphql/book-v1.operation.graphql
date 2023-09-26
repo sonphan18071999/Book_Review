@@ -1,0 +1,7 @@
+mutation createBookDisplayForHomePage($title: String!, $description: String) {
+  createBook(title: $title, description: $description) {
+    id
+    title
+    description
+  }
+}

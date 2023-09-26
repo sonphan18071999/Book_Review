@@ -1,0 +1,11 @@
+mutation uploadBookCoverImage($coverImage: Upload!, $bookId: ID!) {
+  uploadBookCoverImage(cover_image: $coverImage, bookId: $bookId) {
+    book {
+      id
+      title
+      description
+      created_at
+      updated_at
+    }
+  }
+}

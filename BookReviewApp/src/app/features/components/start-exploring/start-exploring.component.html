@@ -1,12 +1,19 @@
 <div class="start__exploring">
-    <div class="start__exploring-title">
-        <div class="decorator"></div>
-        <div>
-            <h2>Start exploring</h2>
-            <h5>Here's what our reviewers think you should read this week.</h5>
-        </div>
+  <div class="start__exploring-title">
+    <div class="decorator"></div>
+    <div>
+      <h2>Start exploring</h2>
+      <h5>Here's what our reviewers think you should read this week.</h5>
     </div>
-    <div class="start__exploring-books">
-        <img src="assets/images/exploringbook.png" *ngFor="let item of booksDisplay"/>
+  </div>
+  <div class="start__exploring-books">
+    <div *ngFor="let item of books" style="margin-bottom: 2rem" class="book">
+      <div (click)="viewDetailBook(item.id)">
+        <img [src]="item?.cover_image" width="100%" height="auto" />
+        <h2 style="width: 100%; margin-top: 1rem">
+          <b>{{ item?.title }}</b>
+        </h2>
+      </div>
     </div>
+  </div>
 </div>
